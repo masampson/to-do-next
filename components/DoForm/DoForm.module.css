@@ -1,0 +1,44 @@
+.input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#do-input {
+  width: 100%;
+  height: 50px;
+  border-radius: 5px 0px 0px 0px;
+  padding: 0px 10px;
+  font-size: 1em;
+  font-weight: 100;
+  color: rgb(0, 0, 0);
+  transition: background-color 0.5s;
+}
+
+#do-button:hover,
+#do-input:hover {
+  background-color: rgba(63, 63, 63, 0.1);
+}
+
+#do-button {
+  width: 20%;
+  height: 50px;
+  font-weight: 300;
+  color: #555555;
+  font-size: 1rem;
+  border-radius: 0px 5px 0px 0px;
+  padding: 5px;
+  transition: background-color 0.5s;
+}
+
+#do-button,
+.delete,
+#do-input {
+  border: none;
+  background-image: none;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+}

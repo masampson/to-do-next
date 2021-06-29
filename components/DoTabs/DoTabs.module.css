@@ -1,0 +1,9 @@
+.tabs {
+  padding: 5px 15px;
+  color: rgb(161, 161, 161);
+}
+
+.tabs:hover {
+  color: #da723c;
+  cursor: pointer;
+}
