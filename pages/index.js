@@ -17,7 +17,7 @@ const TABS_NAMES = Object.keys(TABS_MAP);
 
 function Home(props) {
   const router = useRouter();
-  // const [toDoList, setToDoList] = useState(data);
+  const [toDoList, setToDoList] = useState(props.toDoList)
   const [filterState, setFilterState] = useState("All");
 
   // Functions
@@ -39,41 +39,23 @@ function Home(props) {
     router.push("/");
   }
 
-  async function toggleActive(id) {
+  async function updateListItem(listItemId, isActive) {
     const response = await fetch("/api/to-do-list", {
       method: "PATCH",
-      body: JSON.stringify(id),
+      body: JSON.stringify({ listItemId, isActive }),
       headers: {
         "Content-Type": "application/json",
       },
-    });
+    })
 
-    const list = await response.json();
+    const updatedItem = await response.json()
+    const updatedToDoList = toDoList.map(listItem => {
+      if (listItem._id === updatedItem._id) return updatedItem
+      return listItem
+    })
 
-    console.log(list);
-
-    router.push("/");
+    setToDoList(updatedToDoList)
   }
-
-  //   const toggleActive = (id) => {
-  //   const updatedList = toDoList.map((item) => {
-  //     if (id === item.id) {
-  //       return { ...item, active: !item.active };
-  //     }
-  //     return item;
-  //   });
-  //   setToDoList(updatedList);
-  // };
-
-  // setToDoList((prevItems) => {
-  //   const newList = [...prevItems];
-  //   newList.unshift({
-  //     value: enteredText,
-  //     active: true,
-  //     id: Math.random().toString(),
-  //   });
-  //   return newList;
-  // });
 
   // const deleteItem = (itemId) => {
   //   setToDoList((prevItems) => {
@@ -99,13 +81,13 @@ function Home(props) {
     />
   ));
 
-  const itemsList = props.toDoList.filter(TABS_MAP[filterState]).map((item) => (
+  const itemsList = toDoList.filter(TABS_MAP[filterState]).map((item) => (
     <DoItem
       item={item.item}
       active={item.active}
       id={item._id}
       key={item._id}
-      toggleActive={toggleActive}
+      onActiveStateChange={updateListItem}
       // deleteItem={deleteItem}
     ></DoItem>
   ));
