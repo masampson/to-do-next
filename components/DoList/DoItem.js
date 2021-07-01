@@ -7,9 +7,9 @@ function DoItem(props) {
       <input
         className={styles["check-off"]}
         type="checkbox"
-        checked={!props.active}
+        checked={props.active}
         name="mark-done"
-        onChange={() => props.toggleActive(props.id)}
+        onChange={(event) => props.onActiveStateChange(props.id, event.target.checked)}
       />
       <label
         htmlFor="mark-done"
